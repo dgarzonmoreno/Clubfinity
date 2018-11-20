@@ -1,4 +1,5 @@
-var userDAO = require('../DAO/UserDAO');
+const Joi = require('joi');
+const userDAO = require('../DAO/UserDAO');
 exports.getAll = (req,res)=>{
     console.log('API GET request called for all users');
     userDAO.getAllUsers((result)=>{
