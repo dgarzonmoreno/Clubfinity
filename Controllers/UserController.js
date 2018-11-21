@@ -1,28 +1,21 @@
 const Joi = require('joi');
 const userDAO = require('../DAO/UserDAO');
 
-const schema = {
-    fname: Joi.string().regex(/w+/).min(2).max(20).required(),
-    lname: Joi.string().regex(/w+/).min(2).max(20).required(),
-    dateOfBirth: Joi.string().regex(/^((0)[0-9]|(1)[0-2])(\/)([0-2][0-9]|(3)[0-1])(\/)\d{4}$/).min(10).max(10),
-    email: Joi.string().regex(/^[0-9A-Za-z]+@ufl.edu$/).email(),
-    username: Joi.string().min(3).max(20).required(),
-    password: Joi.string().min(3).max(20).required()
-};
-
 
 exports.getAll = (req,res)=>{
     console.log('API GET request called for all users');
-    userDAO.getAllUsers((result)=>{
+    userDAO.getAllUsers((err, result)=>{
+        if (err) throw err;
         res.send(result);
     });
 };
 
 exports.get = (req,res)=>{
     console.log(`API GET request called for ${req.params.id}`);
-    userDAO.getUser(req.params.id,(result)=>{
+    userDAO.getUser(req.params.id,(err,result)=>{
+        if(err) throw err;
         if(result){
-            res.json(result);
+            res.send(result);
         }
         else{
             res.status(404).send(`User with username ${req.params.id} not found`);
@@ -30,36 +23,55 @@ exports.get = (req,res)=>{
     });
 };
 exports.update = (req,res)=>{
-    const params = req.query;
-    if(Object.keys(params).length!=0){
-        console.log(`API PUT request called for ${req.params.id}`);
-        userDAO.getUser(req.params.id,(result)=>{
-            if(result){
-                for(var entry in params){
-                    if(!Object.keys(result[0]).includes(entry)){
-                        res.status(404).send(`User has no attritube of ${entry}`);
-                        return;
+    const schema = {
+        fname: Joi.string().regex(/\w+/).min(2).max(20),
+        lname: Joi.string().regex(/\w+/).min(2).max(20),
+        dateOfBirth: Joi.string().regex(/^((0)[0-9]|(1)[0-2])(\/)([0-2][0-9]|(3)[0-1])(\/)\d{4}$/).min(10).max(10),
+        email: Joi.string().regex(/^[0-9A-Za-z]+@ufl.edu$/).email(),
+        username: Joi.string().min(3).max(20),
+        password: Joi.string().min(3).max(20)
+    };
+    console.log(`API PUT request called for ${req.params.id}`);
+    userDAO.getUser(req.params.id,(err,result)=>{
+        if(err) throw err;
+        if(result){
+            Joi.validate(req.body,schema,(err,value)=>{
+                if(err) res.status(404).send(err['message']);
+                else if(Object.keys(value).length===0){
+                    res.status(404).send('No request body');
+                }
+                else{
+                    for(var entry in value){
+                        if(value[entry]){
+                            userDAO.updateUser(req.params.id, entry, value[entry],(err)=>{
+                                if(err) throw err;
+                            });
+                        }
                     }
+                    res.status(204).send();
                 }
-                for(var entry in params){
-                    userDAO.updateUser(req.params.id,entry,params[entry]);
-                }
-                res.status(204).send();
-            }
-            else{
-                res.status(404).send(`User with username ${req.params.id} not found`)
-            }
-        });
-    }
-    else{
-        res.status(404).send('No query string passed into request; Must include parameters to be updated');
-    }
+            });
+        }
+        else{
+            res.status(404).send(`User with username ${req.params.id} not found`)
+        }
+    });
 };
 exports.create = (req,res)=>{
-    userDAO.getUser(req.body.username,(result)=>{
+    const schema = {
+        fname: Joi.string().regex(/^\w+$/).min(2).max(20).required(),
+        lname: Joi.string().regex(/\w+/).min(2).max(20).required(),
+        dateOfBirth: Joi.string().regex(/^((0)[0-9]|(1)[0-2])(\/)([0-2][0-9]|(3)[0-1])(\/)\d{4}$/).min(10).max(10),
+        email: Joi.string().regex(/^[0-9A-Za-z]+@ufl.edu$/).email(),
+        username: Joi.string().min(3).max(20).required(),
+        password: Joi.string().min(3).max(20).required()
+    };
+    userDAO.getUser(req.body.username,(err, result)=>{
+        if(err) throw err;
         if(!result){
+            console.log('User does not exist, creating...');
             Joi.validate(req.body,schema,(err,value)=>{
-                if(err) res.status(400).send(err);
+                if(err) res.status(400).send(err['message']);
                 else {
                     console.log(value);
                     userDAO.createUser(value['fname'],value['lname'],value['dateOfBirth'],value['email'],value['username'],value['password'],(err)=>{
@@ -76,9 +88,12 @@ exports.create = (req,res)=>{
     
 };
 exports.delete = (req,res)=>{
-    userDAO.getUser(req.params.id,(result)=>{
+    userDAO.getUser(req.params.id,(err,result)=>{
+        if(err) throw err;
         if(result){
-            userDAO.deleteUser(req.params.id);
+            userDAO.deleteUser(req.params.id,(err)=>{
+                if(err) throw err;
+            });
             res.status(204).send('User successfully deleted');
         }
         else{
