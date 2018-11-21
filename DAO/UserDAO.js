@@ -1,7 +1,7 @@
-var mysql = require('mysql');
-var User = require('../Model/User.js');
+const mysql = require('mysql');
+const User = require('../Model/User.js');
 
-var conn = mysql.createConnection({
+const conn = mysql.createConnection({
   host: "localhost",
   user: "nodeuser",
   password: "password",
@@ -13,12 +13,13 @@ conn.connect((err) =>{
   console.log('Connected!');
 });
 
-exports.createUser = (firstname_,lastname_,dob_,email_,username_,password_)=>{
+exports.createUser = (firstname_,lastname_,dob_,email_,username_,password_,callback)=>{
   let query = `INSERT INTO users(fname,lname,dateOfBirth,email,username,password) VALUES(\'${firstname_}\',
   \'${lastname_}\',\'${dob_}\',\'${email_}\',\'${username_}\',\'${password_}\')`;
   conn.query(query,(err,result)=>{
-    if (err) throw (new Error('Syntax error in query'));
+    if (err) callback(new Error('Syntax error in query'));
     console.log(`Successfully added ${username_} to the database`);
+    callback(null);
   });
 },
 exports.getAllUsers = (callback)=>{

@@ -6,7 +6,7 @@ var passport = require('passport'), LocalStrategy = require('passport-local').St
 var userDAO = require('../DAO/UserDAO');
 
 router.use(flash());
-router.use(session({secret:'Inuyasha'}));
+router.use(session({secret:'Inuyasha',resave: false, saveUninitialized: false}));
 router.use(passport.initialize());
 router.use(passport.session());
 

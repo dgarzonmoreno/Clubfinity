@@ -1,11 +1,23 @@
 const Joi = require('joi');
 const userDAO = require('../DAO/UserDAO');
+
+const schema = {
+    fname: Joi.string().regex(/w+/).min(2).max(20).required(),
+    lname: Joi.string().regex(/w+/).min(2).max(20).required(),
+    dateOfBirth: Joi.string().regex(/^((0)[0-9]|(1)[0-2])(\/)([0-2][0-9]|(3)[0-1])(\/)\d{4}$/).min(10).max(10),
+    email: Joi.string().regex(/^[0-9A-Za-z]+@ufl.edu$/).email(),
+    username: Joi.string().min(3).max(20).required(),
+    password: Joi.string().min(3).max(20).required()
+};
+
+
 exports.getAll = (req,res)=>{
     console.log('API GET request called for all users');
     userDAO.getAllUsers((result)=>{
         res.send(result);
     });
 };
+
 exports.get = (req,res)=>{
     console.log(`API GET request called for ${req.params.id}`);
     userDAO.getUser(req.params.id,(result)=>{
@@ -44,14 +56,24 @@ exports.update = (req,res)=>{
     }
 };
 exports.create = (req,res)=>{
-    const params = req.query;
-    if(Object.keys(params).length==6){ // <=CHANGE THIS LATER I DON'T LIKE MAGIC NUMBERS
-        userDAO.createUser(params['fname'],params['lname'],params['dateOfBirth'],params['email'],params['username'],params['password']);
-        res.status(201).send('User created successfully');
-    }
-    else{
-        res.status(404).send('Insufficient parameters provided');
-    }
+    userDAO.getUser(req.body.username,(result)=>{
+        if(!result){
+            Joi.validate(req.body,schema,(err,value)=>{
+                if(err) res.status(400).send(err);
+                else {
+                    console.log(value);
+                    userDAO.createUser(value['fname'],value['lname'],value['dateOfBirth'],value['email'],value['username'],value['password'],(err)=>{
+                        if(err) throw err;
+                        res.status(201).send('User created successfully');
+                    });
+                }
+            });
+        }
+        else{
+            res.status(400).send('User already exists in the database');
+        }
+    });
+    
 };
 exports.delete = (req,res)=>{
     userDAO.getUser(req.params.id,(result)=>{
