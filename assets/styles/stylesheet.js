@@ -9,7 +9,7 @@ const primary = StyleSheet.create({
     bodyText: {
         color: '#636e72',
         fontSize: 13,
-        fontFamily: 'Roboto',
+        fontFamily: 'Helvetica',
     },
     headerText: {
         fontSize: 20
