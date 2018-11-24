@@ -3,13 +3,12 @@ import { StyleSheet, Dimensions } from 'react-native'
 // Primary Style Guide for entire application
 const primary = StyleSheet.create({
     container: {
-        padding: 20,
-        backgroundColor: '#34495e'
+        paddingHorizontal: 20,
+        backgroundColor: '#00b894'
     },
     bodyText: {
         color: '#636e72',
         fontSize: 13,
-        fontFamily: 'Roboto',
     },
     headerText: {
         fontSize: 20
@@ -17,21 +16,21 @@ const primary = StyleSheet.create({
 });
 
 // Style definition for card components
-const card = StyleSheet.create ({
+const card = StyleSheet.create({
     title: {
-        color: 'steelblue',
+        color: '#2980b9',
         fontSize: 20,
         fontWeight: 'bold',
         flex: 5
     },
     location: {
-        color: '#8fbc8f',
+        color: 'teal',
         fontWeight: '700',
         marginTop: 5,
         marginBottom: 5
     },
     container: {
-        backgroundColor: '#F7F7F7',
+        backgroundColor: '#f5f6fa',
         padding: 15,
         marginRight: 5,
         marginLeft: 5,
@@ -40,6 +39,7 @@ const card = StyleSheet.create ({
         borderWidth: 1,
         borderRadius: 5,
         borderColor: 'white',
+        elevation: 2
     },
     bodyText: primary.bodyText,
     banner: {
@@ -56,8 +56,9 @@ const card = StyleSheet.create ({
         height: 50
     },
     body: {
-        flex: 5
+        flex: 5,
     }
-})
+});
+
 
 export { primary, card }
