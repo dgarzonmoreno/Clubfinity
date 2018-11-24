@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Button, Text, View, TextInput } from 'react-native';
-import { primary, card } from './assets/styles/stylesheet';
-import { Card } from './components/card';
+import { primary } from './assets/styles/stylesheet';
+import EventCard from './components/EventCard';
 const ACCESS_TOKEN = "EAAPnJK6Qg9YBAEOMIayl8sUTKaEs8IBsgyF54UxwEXES9H4ryTNZCqAm7Jj0DyV6NSAgmzZChGYey33sKCC1VB4ZAaAX1DRTBJsaoEQoDsbHwNZB4wv5GSZAZCyGeYSNl5XaYfErvbgUhpgHAhW1kvwKgsFghhq3ZAKWA3z57NwhQZDZD";
 
 // Event Feed App Module
@@ -15,7 +15,6 @@ export default class EventFeed extends Component {
     return fetch(`https://graph.facebook.com/420010478012940/events?access_token=${ACCESS_TOKEN}`)
       .then((response) => response.json())
       .then((responseJson) => {
-
         this.setState({
           isLoading: false,
           dataSource: responseJson.data,
@@ -41,7 +40,7 @@ export default class EventFeed extends Component {
         <FlatList
           data={this.state.dataSource}
           renderItem={({ item }) =>
-            <Card data={item} />
+            <EventCard data={item} />
           }
           keyExtractor={({ id }, index) => id}
         />

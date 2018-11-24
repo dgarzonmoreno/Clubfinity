@@ -4,7 +4,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 const primary = StyleSheet.create({
     container: {
         padding: 20,
-        backgroundColor: '#34495e'
+        backgroundColor: '#ffffff'
     },
     bodyText: {
         color: '#636e72',
@@ -17,7 +17,7 @@ const primary = StyleSheet.create({
 });
 
 // Style definition for card components
-const card = StyleSheet.create ({
+const card = StyleSheet.create({
     title: {
         color: 'steelblue',
         fontSize: 20,
@@ -40,6 +40,7 @@ const card = StyleSheet.create ({
         borderWidth: 1,
         borderRadius: 5,
         borderColor: 'white',
+        elevation: 2
     },
     bodyText: primary.bodyText,
     banner: {
@@ -56,8 +57,9 @@ const card = StyleSheet.create ({
         height: 50
     },
     body: {
-        flex: 5
+        flex: 5,
     }
-})
+});
+
 
 export { primary, card }
