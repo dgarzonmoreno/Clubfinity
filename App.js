@@ -1,50 +1,35 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, Button, Text, View, TextInput } from 'react-native';
-import { primary } from './assets/styles/stylesheet';
-import EventCard from './components/EventCard';
-const ACCESS_TOKEN = "EAAPnJK6Qg9YBAEOMIayl8sUTKaEs8IBsgyF54UxwEXES9H4ryTNZCqAm7Jj0DyV6NSAgmzZChGYey33sKCC1VB4ZAaAX1DRTBJsaoEQoDsbHwNZB4wv5GSZAZCyGeYSNl5XaYfErvbgUhpgHAhW1kvwKgsFghhq3ZAKWA3z57NwhQZDZD";
+import { FlatList, ActivityIndicator, View,
+  TextInput, Platform, StatusBar, StyleSheet, Text } from 'react-native';
+import { Font, Icon } from 'expo';
+import AppNavigator from './navigation/TabNavigator';
 
-// Event Feed App Module
-export default class EventFeed extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isLoading: true };
-  }
-
-  componentDidMount() {
-    return fetch(`https://graph.facebook.com/420010478012940/events?access_token=${ACCESS_TOKEN}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.data,
-        }, function () {
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
+export default class App extends React.Component {
+  state = {
+    isLoadingComplete: true,
+  };
 
   render() {
-    if (this.state.isLoading) {
+    if (!this.state.isLoadingComplete) {
       return (
         <View style={{ flex: 1, padding: 20 }}>
           <ActivityIndicator />
         </View>
-      )
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+              <AppNavigator />
+            </View>
+      );
     }
-    return (
-      <View style={[primary.container, primary.bodyText]}>
-        <Text style={primary.headerText}>Event Feed</Text>
-        <FlatList
-          data={this.state.dataSource}
-          renderItem={({ item }) =>
-            <EventCard data={item} />
-          }
-          keyExtractor={({ id }, index) => id}
-        />
-      </View>
-    );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+  },
+});
