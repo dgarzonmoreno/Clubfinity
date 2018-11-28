@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator, View,
-  TextInput, Platform, StatusBar, StyleSheet, Text } from 'react-native';
-import { Font, Icon } from 'expo';
+import {
+  ActivityIndicator, View,
+  Platform, StatusBar, StyleSheet, Text
+} from 'react-native';
 import AppNavigator from './navigation/TabNavigator';
 
-export default class App extends React.Component {
+export default class App extends Component {
   state = {
     isLoadingComplete: true,
   };
@@ -19,9 +20,9 @@ export default class App extends React.Component {
     } else {
       return (
         <View style={styles.container}>
-              {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-              <AppNavigator />
-            </View>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <AppNavigator />
+        </View>
       );
     }
   }

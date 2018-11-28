@@ -41,6 +41,7 @@ class EventFeed extends Component {
           data={this.state.dataSource}
           renderItem={({ item }) =>
             <EventCard data={item} />
+            
           }
           keyExtractor={({ id }, index) => id}
         />
