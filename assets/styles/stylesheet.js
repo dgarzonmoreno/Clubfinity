@@ -4,7 +4,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 const primary = StyleSheet.create({
     container: {
         paddingHorizontal: 20,
-        backgroundColor: '#00b894'
+        backgroundColor: '#fff'
     },
     bodyText: {
         color: '#636e72',
@@ -37,8 +37,8 @@ const card = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         borderWidth: 1,
-        borderRadius: 5,
-        borderColor: 'white',
+        borderColor: "#f5f6fa",
+        // borderRadius: 5,
         elevation: 2
     },
     bodyText: primary.bodyText,

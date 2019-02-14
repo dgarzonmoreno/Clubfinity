@@ -2,48 +2,68 @@ import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Button, Text, View, TextInput } from 'react-native';
 import { primary } from '../assets/styles/stylesheet';
 import EventCard from '../components/EventCard';
-const ACCESS_TOKEN = "EAAPnJK6Qg9YBAEOMIayl8sUTKaEs8IBsgyF54UxwEXES9H4ryTNZCqAm7Jj0DyV6NSAgmzZChGYey33sKCC1VB4ZAaAX1DRTBJsaoEQoDsbHwNZB4wv5GSZAZCyGeYSNl5XaYfErvbgUhpgHAhW1kvwKgsFghhq3ZAKWA3z57NwhQZDZD";
 
 // Event Feed App Module
 class EventFeed extends Component {
-
+  static navigationOptions = {
+    title: 'Clubfinity',
+    headerStyle: { backgroundColor: '#7e947f' },
+    headerTitleStyle: { color: "#ecf0f1", letterSpacing: 2 },
+  }
   constructor(props) {
     super(props);
     this.state = { isLoading: true };
   }
 
-  componentDidMount() {
-    return fetch(`https://graph.facebook.com/420010478012940/events?access_token=${ACCESS_TOKEN}`)
-      .then((response) => response.json())
-      .then((responseJson) => {
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.data,
-        }, function () {
-        });
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
   render() {
-    if (this.state.isLoading) {
-      return (
-        <View style={{ flex: 1, padding: 20 }}>
-          <ActivityIndicator />
-        </View>
-      )
-    }
+    const eventData = [
+      {
+        id: 1,
+        name: "Event Name",
+        place: "Event Location",
+        description: "Dank Descritpion"
+      },
+      {
+        id: 2,
+        name: "Event Name",
+        place: "Event Location",
+        description: "Dank Descritpion"
+      },
+      {
+        id: 3,
+        name: "Event Name",
+        place: "Event Location",
+        description: "Dank Descritpion"
+      },
+      {
+        id: 4,
+        name: "Event Name",
+        place: "Event Location",
+        description: "Dank Descritpion"
+      },
+      {
+        id: 5,
+        name: "Event Name",
+        place: "Event Location",
+        description: "Dank Descritpion"
+      },
+      {
+        id: 6,
+        name: "Event Name",
+        place: "Event Location",
+        description: "Dank Descritpion"
+      }
+    ];
+
     return (
       <View style={[primary.container, primary.bodyText]}>
         <FlatList
-          data={this.state.dataSource}
+          data={eventData}
+          key={eventData.id}
           renderItem={({ item }) =>
             <EventCard data={item} />
-            
           }
-          keyExtractor={({ id }, index) => id}
+          keyExtractor={(item) => item.id.toString()}
         />
       </View>
     );

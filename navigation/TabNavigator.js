@@ -12,11 +12,11 @@ const HomeStack = createStackNavigator({
   Home: HomeScr,
 }, {
   navigationOptions: {
+    title: 'Home',
     tabBarIcon: ({ focused, horizontal, tintColor }) => {
       iconName = Platform.OS === 'ios' ? `ios-home` : 'md-home';
       return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
     },
-    header: null,
     headerStyle: {
       backgroundColor: 'white',
       color: 'black'
@@ -69,10 +69,10 @@ export default createAppContainer(createBottomTabNavigator({
   Calendar: CalendarStack,
   Profile: ProfileStack,
 }, {
+  headerLayoutPreset: 'center',
   tabBarOptions: {
-    activeTintColor: '#2980b9',
+    activeTintColor: '#7e947f',
     inactiveTintColor: 'gray',
-  },
-  header: null,
+  }
  },
 ));
