@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
-import PropTypes from 'prop-types';
 import { card } from '../assets/styles/stylesheet';
 import { EventButton } from './EventButton';
 
@@ -25,9 +24,5 @@ export default class EventCard extends Component {
     );
   }
   
-  isPresent(value) {
-    if (value != null) return value.name;
-    else return "TBD";
-  }
 }
 

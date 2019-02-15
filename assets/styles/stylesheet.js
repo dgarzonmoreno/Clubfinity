@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native'
 // Primary Style Guide for entire application
 const primary = StyleSheet.create({
     container: {
-        paddingHorizontal: 20,
+        paddingHorizontal: 10,
         backgroundColor: '#fff'
     },
     bodyText: {
