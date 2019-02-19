@@ -19,39 +19,39 @@ class EventFeed extends Component {
     const eventData = [
       {
         id: 1,
-        name: "Event Name",
-        place: "Event Location",
-        description: "Dank Descritpion"
+        name: "Software Engineering Club",
+        place: "CSE 0113",
+        description: "1/12/19 - Docker Tech Talk"
       },
       {
         id: 2,
-        name: "Event Name",
-        place: "Event Location",
-        description: "Dank Descritpion"
+        name: "ACM",
+        place: "Fishbowl",
+        description: "1/13/19 - Infinite Energy Event"
       },
       {
         id: 3,
-        name: "Event Name",
-        place: "Event Location",
-        description: "Dank Descritpion"
+        name: "ACE",
+        place: "TUR 0114",
+        description: "1/14/19 - Stuff"
       },
       {
         id: 4,
-        name: "Event Name",
-        place: "Event Location",
-        description: "Dank Descritpion"
+        name: "InfoSEC",
+        place: "TUR 0114",
+        description: "1/15/19 - Hacking"
       },
       {
         id: 5,
-        name: "Event Name",
-        place: "Event Location",
-        description: "Dank Descritpion"
+        name: "WiCSE",
+        place: "NPB 6472",
+        description: "1/16/19 - Event"
       },
       {
         id: 6,
-        name: "Event Name",
-        place: "Event Location",
-        description: "Dank Descritpion"
+        name: "SHPE",
+        place: "MEB 2921",
+        description: "1/17/19 - Event"
       }
     ];
 
