@@ -42,6 +42,11 @@ const card = StyleSheet.create({
         elevation: 2
     },
     bodyText: primary.bodyText,
+    agendaText: {
+        color: '#636e72',
+        fontSize: 13,
+        alignSelf: 'flex-end'
+    },
     banner: {
         flexDirection: 'row',
         justifyContent: 'space-between',

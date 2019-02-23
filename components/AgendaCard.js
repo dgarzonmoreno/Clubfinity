@@ -4,15 +4,16 @@ import { card } from '../assets/styles/stylesheet';
 
 export default class AgendaCard extends Component {
     render() {
+        const data = this.props.data;
         return (
             <View style={[card.container, style.container,]}>
                 <View style={style.mainSection}>
-                    <Text style={style.title}>GBM #2: Clubfinity</Text>
-                    <Text style={card.bodyText}>Software Engineering Club</Text>
+                    <Text style={style.title}>{data.title}</Text>
+                    <Text style={card.bodyText}>{data.club}</Text>
                 </View>
                 <View style={style.subSection}>
-                    <Text style={card.bodyText}>5:10 pm</Text>
-                    <Text style={card.bodyText}>CSE E112</Text>
+                    <Text style={card.agendaText}>{data.time}</Text>
+                    <Text style={card.agendaText}>{data.location}</Text>
                 </View>
 
             </View>
@@ -39,6 +40,7 @@ const style = StyleSheet.create({
     },
 
     subSection: {
-        flex: 1
+        flex: 2,
+        alignContent: 'flex-end'
     }
 })

@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import { Button } from 'react-native';
 
 class EventButton extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -15,8 +12,8 @@ class EventButton extends Component {
             />);
     }
 
-    _eventHandler(type) {
-        console.log("Button pressed");
+    _eventHandler = () => {
+        console.log("Button clicked");
     }
 }
 
