@@ -8,7 +8,7 @@ export default class EventCard extends Component {
 
   constructor(props) {
     super(props);
-    this.state= {
+    this.state = {
       goingChecked: false,
       hideCard: false
     }
@@ -16,13 +16,12 @@ export default class EventCard extends Component {
 
   // Change card style if 'Going' clicked || remove if Not going
   goingBtnHandler = () => {
-      this.setState({
-        goingChecked: !this.state.goingChecked
-      });
+    this.setState({
+      goingChecked: !this.state.goingChecked
+    });
   }
 
   notGoingHandler = () => {
-    console.log('Not going');
   }
 
 
@@ -46,6 +45,6 @@ export default class EventCard extends Component {
       </View>
     );
   }
-  
+
 }
 

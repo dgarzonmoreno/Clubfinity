@@ -11,7 +11,11 @@ const primary = StyleSheet.create({
         fontSize: 13,
     },
     headerText: {
-        fontSize: 20
+        fontSize: 14,
+        fontWeight: '100',
+        margin: 10,
+        alignSelf: 'center',
+        color: '#636e72',
     }
 });
 
@@ -38,7 +42,6 @@ const card = StyleSheet.create({
         marginBottom: 10,
         borderWidth: 1,
         borderColor: "#f5f6fa",
-        // borderColor: '#55efc4',
         borderRadius: 5,
         borderWidth: 4,
         elevation: 2
@@ -51,7 +54,6 @@ const card = StyleSheet.create({
         marginTop: 10,
         marginBottom: 10,
         borderWidth: 1,
-        // borderColor: "#f5f6fa",
         borderColor: '#55efc4',
         borderRadius: 5,
         borderWidth: 4,
