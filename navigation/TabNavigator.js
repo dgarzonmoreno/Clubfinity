@@ -72,7 +72,7 @@ export default createAppContainer(createBottomTabNavigator({
   headerLayoutPreset: 'center',
   tabBarOptions: {
     activeTintColor: '#7e947f',
-    inactiveTintColor: 'gray',
+    inactiveTintColor: '#666666',
   }
  },
 ));
