@@ -38,9 +38,26 @@ const card = StyleSheet.create({
         marginBottom: 10,
         borderWidth: 1,
         borderColor: "#f5f6fa",
-        // borderRadius: 5,
+        // borderColor: '#55efc4',
+        borderRadius: 5,
+        borderWidth: 4,
         elevation: 2
     },
+    goingMarked: {
+        backgroundColor: '#f5f6fa',
+        padding: 15,
+        marginRight: 5,
+        marginLeft: 5,
+        marginTop: 10,
+        marginBottom: 10,
+        borderWidth: 1,
+        // borderColor: "#f5f6fa",
+        borderColor: '#55efc4',
+        borderRadius: 5,
+        borderWidth: 4,
+        elevation: 3
+    },
+
     bodyText: primary.bodyText,
     agendaText: {
         color: '#636e72',
@@ -51,7 +68,7 @@ const card = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         flex: 1,
-        marginBottom: 10
+        marginBottom: 10,
     },
     bannerIcon: {
         flex: 1,
