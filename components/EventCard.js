@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
 import { Text, View, Image } from 'react-native';
-import PropTypes from 'prop-types';
 import { card } from '../assets/styles/stylesheet';
-import { EventButton } from './EventButton';
+import { GoingButton } from './GoingButton';
+import { NotGoingButton } from './NotGoingButton';
 
 export default class EventCard extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      goingChecked: false,
+      hideCard: false
+    }
+  }
+
+  // Change card style if 'Going' clicked || remove if Not going
+  goingBtnHandler = () => {
+    this.setState({
+      goingChecked: !this.state.goingChecked
+    });
+  }
+
+  notGoingHandler = () => {
+  }
+
+
   render() {
     const data = this.props.data;
+    const containerStyle = this.state.goingChecked ? card.goingMarked : card.container;
     return (
-      <View style={card.container}>
+      <View style={containerStyle}>
         <View style={card.banner}>
           <Image style={card.bannerIcon} source={require('../assets/images/sec-icon.png')} />
           <Text style={card.title}>{data.name}</Text>
@@ -17,17 +38,13 @@ export default class EventCard extends Component {
           <Text style={card.location}>{data.place}</Text>
           <Text style={card.bodyText}>{data.description}</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
-            <EventButton name={'Not Going'} btnColor={'#ff8080'} />
-            <EventButton name={'Going'} btnColor={'#16a085'} />
+            <NotGoingButton clickHandler={this.notGoingHandler} name={'Not Going'} btnColor={'#ff8080'} />
+            <GoingButton clickHandler={this.goingBtnHandler} name={'Going'} btnColor={'#16a085'} />
           </View>
         </View>
       </View>
     );
   }
-  
-  isPresent(value) {
-    if (value != null) return value.name;
-    else return "TBD";
-  }
+
 }
 

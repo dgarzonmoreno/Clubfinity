@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, ActivityIndicator, Button, Text, View, TextInput } from 'react-native';
 import { primary } from '../assets/styles/stylesheet';
 import EventCard from '../components/EventCard';
+import Icon from 'react-native-vector-icons/Foundation';
 
 // Event Feed App Module
 class EventFeed extends Component {
@@ -57,6 +58,7 @@ class EventFeed extends Component {
 
     return (
       <View style={[primary.container, primary.bodyText]}>
+        <Text style={primary.headerText}>Upcoming Events <Icon name="megaphone" color={'teal'} size={24} />   </Text>
         <FlatList
           data={eventData}
           key={eventData.id}
