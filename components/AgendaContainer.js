@@ -29,8 +29,8 @@ export default class AgendaContainer extends React.Component {
 		return (
 			<View style={style.agendaContainer}>
 				{(curEventsArr.length != 0 &&
-					<Text>Events happening today</Text> ) ||
-					<Text>Sorry! No Events today</Text>
+					<Text style={style.agendaSubheading}>Events happening today</Text> ) ||
+					<Text style={style.agendaSubheading}>Sorry! No Events today</Text>
 				}
 				<FlatList
 					data={curEventsArr}
@@ -47,7 +47,12 @@ export default class AgendaContainer extends React.Component {
 
 const style = StyleSheet.create({
 	agendaContainer: {
+		marginTop: 20,
 		flex: 2,
 		paddingHorizontal: 10,
 	},
+
+	agendaSubheading: {
+		marginTop: 10,
+	}
 });

@@ -28,6 +28,7 @@ export default class EventCard extends Component {
   render() {
     const data = this.props.data;
     const containerStyle = this.state.goingChecked ? card.goingMarked : card.container;
+    // const iconImagePath = `../assets/images/${this.props.data.icon}`;
     return (
       <View style={containerStyle}>
         <View style={card.banner}>
